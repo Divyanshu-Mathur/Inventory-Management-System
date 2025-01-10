@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+            color: #333;
+        }
+
+        nav {
+            background-color: #2c3e50;
+            overflow: hidden;
+            padding: 10px 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        nav a {
+            float: left;
+            color: #ecf0f1;
+            text-decoration: none;
+            padding: 12px 16px;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #34495e;
+            color: #1abc9c;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #2c3e50;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .transaction {
+            border: 1px solid #dcdde1;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            background: #f9f9f9;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .transaction:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .transaction h4 {
+            margin: 5px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        footer a {
+            color: #1abc9c;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('add_item') }}">Add Item</a>
+        <a href="{{ url_for('add_transaction') }}">Add Transaction</a>
+        <a href="{{ url_for('add_purchase') }}">Add Purchase</a>
+        <a href="{{ url_for('purchase') }}">Purchase Orders</a>
+    </nav>
+
+    <h1>Transactions</h1>
+
+    <div class="container">
+        {% for i in data %}
+        <div class="transaction">
+            <h4>ID: {{ i['id'] }}</h4>
+            <h4>Item_ID: {{ i['item_id'] }}</h4>
+            <h4>Type: {{ i['type'] }}</h4>
+            <h4>Qty: {{ i['quantity'] }}</h4>
+            <h4>Date: {{ i['date_time'] }}</h4>
+        </div>
+        {% endfor %}
+    </div>
+
+    <footer>
+        &copy; 2025 Inventory Management System | <a href="#">Privacy Policy</a>
+    </footer>
+</body>
+
+</html>

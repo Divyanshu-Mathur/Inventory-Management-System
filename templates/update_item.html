@@ -1,0 +1,157 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Item</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+            color: #333;
+        }
+
+        nav {
+            background-color: #2c3e50;
+            overflow: hidden;
+            padding: 10px 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        nav a {
+            float: left;
+            color: #ecf0f1;
+            text-decoration: none;
+            padding: 12px 16px;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #34495e;
+            color: #1abc9c;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #2c3e50;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        label {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        footer a {
+            color: #1abc9c;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('add_item') }}">Add Item</a>
+        <a href="{{ url_for('add_transaction') }}">Add Transaction</a>
+        <a href="{{ url_for('add_purchase') }}">Add Purchase</a>
+        <a href="{{ url_for('purchase') }}">Purchase Orders</a>
+        <a href="{{ url_for('log') }}">Transaction Log</a>
+    </nav>
+
+    <h1>Edit Item</h1>
+
+    <div class="container">
+        {% if id != -1 %}
+        <form action="{{ url_for('edit_item', id=data[0]['id']) }}" method="post">
+            <label for="name">Enter the name of the item</label>
+            <input type="text" name="name" value="{{ data[0].name }}" required>
+
+            <label for="price">Enter the price of the item</label>
+            <input type="number" name="price" step="0.01" value="{{ data[0].price }}" required>
+
+            <label for="qty">Enter the quantity of the item</label>
+            <input type="number" name="qty" value="{{ data[0].qty }}" required>
+
+            <label for="category">Enter the category of the item</label>
+            <input type="text" name="category" value="{{ data[0].category }}" required>
+
+            <label for="min_stock">Enter the minimum stock of the item</label>
+            <input type="number" name="min_stock" value="{{ data[0].min_stock }}" required>
+
+            <button type="submit">Submit</button>
+        </form>
+        {% else %}
+        <p>Item not found</p>
+        {% endif %}
+    </div>
+
+    <footer>
+        &copy; 2025 Inventory Management System | <a href="#">Privacy Policy</a>
+    </footer>
+</body>
+
+</html>
